@@ -1,0 +1,25 @@
+{
+  "projectName": "My Project",
+  "techStack": {
+    "framework": "",
+    "language": "TypeScript",
+    "database": "",
+    "styling": "",
+    "packageManager": "npm"
+  },
+  "testing": {
+    "typeCheck": "npx tsc --noEmit",
+    "lint": "npm run lint",
+    "build": "npm run build",
+    "uiTesting": "dev-browser",
+    "databaseCommands": []
+  },
+  "openspec": {
+    "enabled": false,
+    "domains": {}
+  },
+  "templates": {
+    "enabled": true,
+    "customTemplates": []
+  }
+}

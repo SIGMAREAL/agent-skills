@@ -1,0 +1,61 @@
+{
+  "templateName": "ui-component",
+  "description": "通用 UI 组件模板（组件开发 + 交互逻辑 + 样式 + 页面集成）",
+  "keywords": ["组件", "页面", "表单", "UI", "界面", "component", "page", "form", "dialog", "modal"],
+  "variables": {
+    "{{component_name}}": "组件名称（如 UserProfile, SettingsPanel）",
+    "{{page_path}}": "页面路径（如 /settings, /profile）"
+  },
+  "tasks": [
+    {
+      "id": "{{feature_name}}-component",
+      "title": "{{component_name}} 组件实现",
+      "description": "创建 {{component_name}} 核心组件和子组件",
+      "steps": [
+        "创建组件文件和目录结构",
+        "实现组件布局和样式",
+        "添加 props 类型定义",
+        "实现交互逻辑和状态管理",
+        "处理加载状态和空状态",
+        "运行类型检查和 lint（{{type_check_command}} + {{lint_command}}）"
+      ],
+      "passes": false,
+      "priority": "high",
+      "tags": ["ui", "component"],
+      "relatedSpecs": []
+    },
+    {
+      "id": "{{feature_name}}-page",
+      "title": "{{component_name}} 页面集成",
+      "description": "将 {{component_name}} 集成到页面中，连接数据和路由",
+      "steps": [
+        "创建或更新页面文件 {{page_path}}",
+        "连接数据源（API 调用或 props 传递）",
+        "实现页面级状态管理",
+        "添加导航和路由集成",
+        "使用 dev-browser 测试完整页面",
+        "运行 lint 和 build 测试（{{lint_command}} + {{build_command}}）"
+      ],
+      "passes": false,
+      "priority": "high",
+      "tags": ["ui", "page", "integration"],
+      "relatedSpecs": []
+    },
+    {
+      "id": "{{feature_name}}-polish",
+      "title": "{{component_name}} 交互优化",
+      "description": "优化交互体验（动画、响应式、无障碍）",
+      "steps": [
+        "添加过渡动画和微交互",
+        "实现响应式布局（移动端适配）",
+        "添加键盘导航和无障碍支持（如需要）",
+        "使用 dev-browser 测试不同视口和交互",
+        "运行 lint 和 build 测试（{{lint_command}} + {{build_command}}）"
+      ],
+      "passes": false,
+      "priority": "medium",
+      "tags": ["ui", "polish", "responsive"],
+      "relatedSpecs": []
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "templateName": "crud",
+  "description": "通用 CRUD 功能模板（数据模型 + API + 列表/详情 UI）",
+  "keywords": ["增删改查", "管理", "列表", "详情", "CRUD", "管理页面"],
+  "variables": {
+    "{{resource}}": "资源/实体名称（如 Product, User, Article）",
+    "{{resource_lower}}": "资源名称小写（如 product, user, article）",
+    "{{route_path}}": "API 路由路径（如 /api/products）"
+  },
+  "tasks": [
+    {
+      "id": "{{feature_name}}-data-model",
+      "title": "{{resource}} 数据模型定义",
+      "description": "定义 {{resource}} 的数据库模型和类型",
+      "steps": [
+        "在 schema 文件中定义 {{resource}} 模型（字段、关系、索引）",
+        "生成数据库客户端代码",
+        "创建 TypeScript 类型定义（如需要）",
+        "运行类型检查验证（{{type_check_command}}）"
+      ],
+      "passes": false,
+      "priority": "critical",
+      "tags": ["database", "model"],
+      "relatedSpecs": []
+    },
+    {
+      "id": "{{feature_name}}-api",
+      "title": "{{resource}} API 端点",
+      "description": "实现 {{resource}} 的 CRUD API（GET/POST/PUT/DELETE）",
+      "steps": [
+        "创建 API 路由文件 {{route_path}}/route.ts",
+        "实现 GET 接口（列表查询 + 分页 + 筛选）",
+        "实现 POST 接口（创建 + 参数验证）",
+        "实现 PUT 接口（更新 + 权限检查）",
+        "实现 DELETE 接口（删除 + 关联检查）",
+        "运行 lint 和 build 测试（{{lint_command}} + {{build_command}}）"
+      ],
+      "passes": false,
+      "priority": "high",
+      "tags": ["api", "backend"],
+      "relatedSpecs": []
+    },
+    {
+      "id": "{{feature_name}}-list-ui",
+      "title": "{{resource}} 列表页面",
+      "description": "创建 {{resource}} 列表页面（表格/卡片 + 搜索 + 分页）",
+      "steps": [
+        "创建页面文件和布局组件",
+        "实现数据加载和列表展示（表格或卡片）",
+        "添加搜索和筛选功能",
+        "添加分页组件",
+        "实现删除确认对话框",
+        "使用 dev-browser 测试页面交互",
+        "运行 lint 和 build 测试（{{lint_command}} + {{build_command}}）"
+      ],
+      "passes": false,
+      "priority": "high",
+      "tags": ["ui", "page"],
+      "relatedSpecs": []
+    },
+    {
+      "id": "{{feature_name}}-form-ui",
+      "title": "{{resource}} 创建/编辑表单",
+      "description": "创建 {{resource}} 的表单组件（新建 + 编辑复用）",
+      "steps": [
+        "创建表单组件（支持新建和编辑模式）",
+        "实现表单验证（必填、格式、长度）",
+        "实现表单提交（调用 API + 错误处理）",
+        "添加加载状态和成功反馈",
+        "使用 dev-browser 测试表单交互",
+        "运行 lint 和 build 测试（{{lint_command}} + {{build_command}}）"
+      ],
+      "passes": false,
+      "priority": "medium",
+      "tags": ["ui", "form", "component"],
+      "relatedSpecs": []
+    }
+  ]
+}

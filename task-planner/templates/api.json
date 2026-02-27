@@ -1,0 +1,60 @@
+{
+  "templateName": "api",
+  "description": "通用 API 端点模板（路由 + 验证 + 业务逻辑 + 错误处理）",
+  "keywords": ["API", "端点", "接口", "后端", "服务", "endpoint", "route", "backend"],
+  "variables": {
+    "{{resource}}": "资源/实体名称（如 Payment, Notification）",
+    "{{resource_lower}}": "资源名称小写（如 payment, notification）",
+    "{{route_path}}": "API 路由路径（如 /api/payments）"
+  },
+  "tasks": [
+    {
+      "id": "{{feature_name}}-types",
+      "title": "{{resource}} 类型定义和数据模型",
+      "description": "定义 {{resource}} 相关的 TypeScript 类型和数据模型",
+      "steps": [
+        "创建类型定义文件（请求/响应类型、枚举）",
+        "更新数据库 schema（如涉及持久化）",
+        "生成数据库客户端代码（如更新了 schema）",
+        "运行类型检查验证（{{type_check_command}}）"
+      ],
+      "passes": false,
+      "priority": "critical",
+      "tags": ["types", "model"],
+      "relatedSpecs": []
+    },
+    {
+      "id": "{{feature_name}}-core-api",
+      "title": "{{resource}} 核心 API 端点",
+      "description": "实现 {{resource}} 的核心 API 路由和业务逻辑",
+      "steps": [
+        "创建 API 路由文件 {{route_path}}/route.ts",
+        "实现请求参数验证",
+        "实现核心业务逻辑",
+        "添加错误处理（参数错误、业务异常、服务器错误）",
+        "返回标准响应格式 { success, data, error }",
+        "运行 lint 和 build 测试（{{lint_command}} + {{build_command}}）"
+      ],
+      "passes": false,
+      "priority": "high",
+      "tags": ["api", "backend"],
+      "relatedSpecs": []
+    },
+    {
+      "id": "{{feature_name}}-integration",
+      "title": "{{resource}} API 集成和前端调用",
+      "description": "创建前端 API 调用函数，集成到现有页面",
+      "steps": [
+        "创建 API 调用工具函数（fetch wrapper / API client）",
+        "集成到相关页面或组件",
+        "处理加载状态、错误状态",
+        "使用 dev-browser 测试端到端流程",
+        "运行 lint 和 build 测试（{{lint_command}} + {{build_command}}）"
+      ],
+      "passes": false,
+      "priority": "medium",
+      "tags": ["integration", "frontend"],
+      "relatedSpecs": []
+    }
+  ]
+}
