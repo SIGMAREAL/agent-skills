@@ -126,6 +126,53 @@ For detailed design specs, see the reference docs in [`syxma-ui/references/`](sy
 
 ---
 
+#### video-summary
+
+Extracts subtitles from videos and content from web articles, generating structured Chinese summaries and full rewrites.
+
+**Install:**
+
+```bash
+npx skills add SIGMAREAL/agent-skills@video-summary
+```
+
+**Features:**
+
+- Bilibili & YouTube subtitle extraction via official APIs
+- Article extraction via Jina Reader (Twitter/X, WeChat, tech blogs)
+- Whisper-based audio transcription for videos without subtitles
+- Anti-blocking batch processing with configurable delays
+- Structured output: summary, key points, full rewrite
+
+**Supported sources:**
+
+| Source | Method |
+|--------|--------|
+| YouTube | Subtitle API → browser-use fallback |
+| Bilibili | Subtitle API |
+| Twitter / X | Jina Reader → browser-use fallback |
+| WeChat articles | Jina Reader → browser-use fallback |
+| Tech blogs | Jina Reader |
+| Any video (no subtitles) | Whisper transcription |
+
+**Usage:**
+
+In Claude Code, just paste a URL:
+
+```
+> 分析这个视频：https://www.bilibili.com/video/BV1xx...
+> 提取这篇文章：https://twitter.com/...
+> 批量处理这些链接：[url1, url2, url3]
+```
+
+Or use the script directly:
+
+```bash
+python3 ~/.claude/skills/video-summary/scripts/extract.py "<URL>"
+```
+
+---
+
 ### Installation
 
 All skills are installed via the [Skills CLI](https://skills.sh/):
@@ -134,6 +181,7 @@ All skills are installed via the [Skills CLI](https://skills.sh/):
 # Install a specific skill
 npx skills add SIGMAREAL/agent-skills@task-planner
 npx skills add SIGMAREAL/agent-skills@syxma-ui
+npx skills add SIGMAREAL/agent-skills@video-summary
 
 # Check for updates
 npx skills check
@@ -265,6 +313,53 @@ npx skills add SIGMAREAL/agent-skills@syxma-ui
 
 ---
 
+#### video-summary
+
+视频字幕与网页文章内容提取工具，自动生成结构化中文总结和全文改写。
+
+**安装：**
+
+```bash
+npx skills add SIGMAREAL/agent-skills@video-summary
+```
+
+**功能特性：**
+
+- B站 / YouTube 字幕 API 直接提取
+- Jina Reader 抓取文章（Twitter/X、微信公众号、技术博客）
+- 无字幕视频支持 Whisper 语音转录
+- 批量处理模式，内置防封锁随机延迟
+- 结构化输出：摘要、核心要点、全文改写
+
+**支持来源：**
+
+| 来源 | 提取方式 |
+|------|---------|
+| YouTube | 字幕 API → browser-use 兜底 |
+| B站 | 字幕 API |
+| Twitter / X | Jina Reader → browser-use 兜底 |
+| 微信公众号 | Jina Reader → browser-use 兜底 |
+| 技术博客 | Jina Reader |
+| 任意视频（无字幕） | Whisper 语音转录 |
+
+**使用方式：**
+
+在 Claude Code 中直接粘贴链接：
+
+```
+> 分析这个视频：https://www.bilibili.com/video/BV1xx...
+> 提取这篇文章：https://twitter.com/...
+> 批量处理这些链接：[url1, url2, url3]
+```
+
+或直接调用脚本：
+
+```bash
+python3 ~/.claude/skills/video-summary/scripts/extract.py "<URL>"
+```
+
+---
+
 ### 安装方式
 
 所有 skill 通过 [Skills CLI](https://skills.sh/) 安装：
@@ -273,6 +368,7 @@ npx skills add SIGMAREAL/agent-skills@syxma-ui
 # 安装指定 skill
 npx skills add SIGMAREAL/agent-skills@task-planner
 npx skills add SIGMAREAL/agent-skills@syxma-ui
+npx skills add SIGMAREAL/agent-skills@video-summary
 
 # 检查更新
 npx skills check
