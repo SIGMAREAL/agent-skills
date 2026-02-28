@@ -118,6 +118,37 @@ def create_session(
     # Generate all session files using generate_files.py
     files = generate_files(config, str(session_path), feature_name)
 
+    # Create resources/ directory for raw input files (PRD docs, Figma data, etc.)
+    resources_dir = session_path / "resources"
+    resources_dir.mkdir(parents=True, exist_ok=True)
+    resources_readme_content = (
+        "# Session Resources\n\n"
+        "将原始输入文件放入此目录：\n\n"
+        "- `*.md` / `*.txt` — 原始 PRD、需求文档（可混乱，task-planner 会重新整理）\n"
+        "- `figma-frames.json` — Figma MCP 节点数据（由 task-planner 规划阶段自动生成）\n\n"
+        "**注意**: 此目录的文件不会直接放入 PRD.md，"
+        "task-planner 会阅读后重新整理。\n"
+    )
+    (resources_dir / "README.md").write_text(resources_readme_content, encoding="utf-8")
+
+    # Create resources/init.md template for capturing original user requirements
+    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+    init_md_content = (
+        f"# 原始需求\n\n"
+        f"> **Session**: {session_name}\n"
+        f"> **初始化时间**: {now}\n\n"
+        f"---\n\n"
+        f"## 用户原始输入\n\n"
+        f"[在此粘贴用户的原始需求，包括所有细节和上下文]\n\n"
+        f"## 补充材料\n\n"
+        f"[相关参考资料、截图说明、链接等]\n"
+    )
+    init_md_path = resources_dir / "init.md"
+    init_md_path.write_text(init_md_content, encoding="utf-8")
+
+    files["resources_dir"] = str(resources_dir)
+    files["init_md"] = str(init_md_path)
+
     # Add metadata
     files["config_source"] = config_source
     files["config"] = {
